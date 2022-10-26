@@ -1,0 +1,26 @@
+apiVersion: "agones.dev/v1"
+kind: Fleet
+metadata:
+  name: board-server
+  namespace: default
+spec:
+  replicas: 2
+  scheduling: Packed
+  template:
+    spec:
+      ports:
+      - name: default
+        containerPort: 8080
+      template:
+        spec:
+          containers:
+            - image: agexample:latest
+              name: board-server
+              imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  memory: "64Mi"
+                  cpu: "20m"
+                limits:
+                  memory: "64Mi"
+                  cpu: "20m"
